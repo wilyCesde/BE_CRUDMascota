@@ -13,7 +13,8 @@ builder.Services.AddSwaggerGen();
 //agregamos context
 builder.Services.AddDbContext<AplicationDbContext>(options =>
  {
-     options.UseSqlServer;
+     //creamos una variable para poder ingresar nombrede nuestra conexion a sql
+     options.UseSqlServer(builder.Configuration.GetConnectionString("Conexion"));
  }
 );
 
