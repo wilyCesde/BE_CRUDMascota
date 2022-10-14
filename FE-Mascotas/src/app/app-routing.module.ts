@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-// Componentes
+// Aca Importamos Los componentes
 import { ListadoMascotaComponent } from './components/listado-mascota/listado-mascota.component';
 import { AgregarEditarMascotaComponent } from './components/agregar-editar-mascota/agregar-editar-mascota.component';
 import { VerMascotaComponent } from './components/ver-mascota/ver-mascota.component';
