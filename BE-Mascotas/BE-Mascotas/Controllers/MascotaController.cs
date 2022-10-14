@@ -9,7 +9,7 @@ namespace BE_Mascotas.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class MascotaController : ControllerBase
-       
+
     {
         private readonly AplicationDbContext _context;
 
@@ -25,24 +25,24 @@ namespace BE_Mascotas.Controllers
         public async Task<IActionResult> Get()
         {
             try
-            {  
+            {
                 //me traiga todos los elementos de la tabla mascotas
                 var ListMascotas = await _context.Mascotas.ToListAsync();
                 return Ok(ListMascotas);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-           
+
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
             try
             {
-                var mascota =await _context.Mascotas.FindAsync(id);
-                if(mascota==null)
+                var mascota = await _context.Mascotas.FindAsync(id);
+                if (mascota == null)
                 {
                     return NotFound();
                 }
@@ -55,12 +55,12 @@ namespace BE_Mascotas.Controllers
             }
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult>Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                var mascota =await _context.Mascotas.FindAsync(id);
-                if (mascota==null)
+                var mascota = await _context.Mascotas.FindAsync(id);
+                if (mascota == null)
                 {
                     return NotFound();
                 }
@@ -80,8 +80,8 @@ namespace BE_Mascotas.Controllers
             {
                 mascota.FechaCreacion = DateTime.Now;
                 _context.Add(mascota);
-               await _context.SaveChangesAsync();
-                return CreatedAtAction("Get",new {id=mascota.Id},mascota);
+                await _context.SaveChangesAsync();
+                return CreatedAtAction("Get", new { id = mascota.Id }, mascota);
             }
             catch (Exception ex)
             {
@@ -89,6 +89,34 @@ namespace BE_Mascotas.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, Mascota mascota)
+        {
+            try
+            {
+                if (id != mascota.Id)
+                {
+                    return BadRequest();
+                }
+                var mascotaItem = await _context.Mascotas.FindAsync(id);
+                if (mascotaItem == null)
+                {
+                    return NotFound();
+                }
+                mascotaItem.Nombre = mascota.Nombre;
+                mascotaItem.Raza = mascota.Raza;
+                mascotaItem.Edad = mascota.Edad;
+                mascotaItem.Peso = mascota.Peso;
+                mascotaItem.Color = mascota.Color;
 
+                await _context.SaveChangesAsync();
+                return NotFound();
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
