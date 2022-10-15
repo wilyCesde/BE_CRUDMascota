@@ -23,6 +23,10 @@ builder.Services.AddCors(options =>options.AddPolicy("AllowWebapp",
      options.UseSqlServer(builder.Configuration.GetConnectionString("Conexion"));
  });
 
+
+//Automapper
+builder.Services.AddAutoMapper(typeof(Program));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

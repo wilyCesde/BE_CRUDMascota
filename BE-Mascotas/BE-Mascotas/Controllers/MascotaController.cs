@@ -1,4 +1,6 @@
-﻿using BE_Mascotas.Models;
+﻿using AutoMapper;
+using BE_Mascotas.Models;
+using BE_Mascotas.Models.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,11 +14,13 @@ namespace BE_Mascotas.Controllers
 
     {
         private readonly AplicationDbContext _context;
+        private readonly IMapper _mapper;
 
         //creamos el contructor para esta clase
-        public MascotaController(AplicationDbContext context)
+        public MascotaController(AplicationDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper; 
         }
 
         //creamos un metodo azincrono para me debuelva un Json en swagger
@@ -46,12 +50,14 @@ namespace BE_Mascotas.Controllers
                 {
                     return NotFound();
                 }
-                return Ok(mascota);
+                var mascotaDto = _mapper.Map<MascotaDTO>(mascota);
+
+                return Ok(mascotaDto);
 
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+              return BadRequest(ex.Message);
             }
         }
         [HttpDelete("{id}")]
@@ -110,7 +116,7 @@ namespace BE_Mascotas.Controllers
                 mascotaItem.Color = mascota.Color;
 
                 await _context.SaveChangesAsync();
-                return NotFound();
+                return NoContent();
             }
             catch (Exception ex)
             {
