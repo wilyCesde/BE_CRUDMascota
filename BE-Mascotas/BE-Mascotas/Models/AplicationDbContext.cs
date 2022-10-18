@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-
 namespace BE_Mascotas.Models
 {  //agregamos dos puntos y la clase DbContext he importamos la clase
    //https://www.entityframeworktutorial.net/efcore/entity-framework-core.aspx
@@ -8,10 +7,15 @@ namespace BE_Mascotas.Models
    //estas url tomamos algunos ejemplos ojo
     public class AplicationDbContext : DbContext
     {
-        public  AplicationDbContext(DbContextOptions<AplicationDbContext>options): base(options)
+        public AplicationDbContext(DbContextOptions<AplicationDbContext> options) : base(options)
         {
-         
+
         }
-       public DbSet<Mascota>Mascotas { get; set; }
+        public DbSet<Mascota> Mascotas { get; set; }
+
+        internal Task<Mascota> ToListAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
