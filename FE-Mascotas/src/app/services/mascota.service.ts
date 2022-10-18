@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Mascota } from '../interfaces/mascota';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class MascotaService {
   private myAppUrl: string = environment.endpoint;

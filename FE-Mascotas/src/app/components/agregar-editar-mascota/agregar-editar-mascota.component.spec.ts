@@ -8,9 +8,9 @@ describe('AgregarEditarMascotaComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AgregarEditarMascotaComponent]
+      declarations: [ AgregarEditarMascotaComponent ]
     })
-      .compileComponents();
+    .compileComponents();
 
     fixture = TestBed.createComponent(AgregarEditarMascotaComponent);
     component = fixture.componentInstance;

@@ -34,7 +34,7 @@ export class AgregarEditarMascotaComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if (this.id != 0) {
+    if(this.id != 0) {
       this.operacion = 'Editar';
       this.obtenerMascota(this.id)
     }
@@ -66,7 +66,7 @@ export class AgregarEditarMascotaComponent implements OnInit {
       peso: this.form.value.peso
     }
 
-    if (this.id != 0) {
+    if(this.id != 0) {
       mascota.id = this.id;
       this.editarMascota(this.id, mascota);
     } else {
@@ -85,14 +85,14 @@ export class AgregarEditarMascotaComponent implements OnInit {
   }
 
   agregarMascota(mascota: Mascota) {
-    this._mascotaService.addMascota(mascota).subscribe(data => {
-      this.mensajeExito('registrada');
-      this.router.navigate(['/listMascotas']);
-    })
+      this._mascotaService.addMascota(mascota).subscribe(data => {
+        this.mensajeExito('registrada');
+        this.router.navigate(['/listMascotas']);
+      })
   }
 
   mensajeExito(texto: string) {
-    this._snackBar.open(`La Mascota fue ${texto} con exito`, '', {
+    this._snackBar.open(`La Mascota fue ${texto} con exito`,'', {
       duration: 4000,
       horizontalPosition: 'right',
     });
